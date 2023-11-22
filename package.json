@@ -1,0 +1,23 @@
+{
+  "name": "mi-primer-servidor-http",
+  "version": "1.0.0",
+  "description": "University project for DeBaPla",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArmandoMoraValles/mi-primer-servidor-HTTP.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ArmandoMoraValles/mi-primer-servidor-HTTP/issues"
+  },
+  "homepage": "https://github.com/ArmandoMoraValles/mi-primer-servidor-HTTP#readme",
+  "dependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
