@@ -6,8 +6,21 @@ const port = 3000;
 const server = http.createServer((req, res) => {
   const url = req.url;
 
-  // Al usar un callback la respuesta se enviara al cargar el archivo
-  // Este codigo permite solicitudes concurrentes no tiene que esperar la respuesta para empezar a procesar otra 
+  const fileExtension = url.slice(url.lastIndexOf('.') + 1);
+
+  let contentType;
+  switch (fileExtension) {
+    case 'html':
+      contentType = 'text/html';
+      break;
+    case 'json':
+      contentType = 'application/json';
+      break;
+    case 'txt':
+      contentType = 'text/plain';
+      break;
+  }
+
   fs.readFile(`.${url}`, 'utf8', (err, fileContent) => {
     if (err) {
       res.writeHead(404, { 'Content-Type': 'text/plain' });
@@ -15,7 +28,7 @@ const server = http.createServer((req, res) => {
       return;
     }
 
-    res.writeHead(200, { 'Content-Type': 'text/html' });
+    res.writeHead(200, { 'Content-Type': contentType });
     res.end(fileContent);
   });
 });

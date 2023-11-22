@@ -1,0 +1,4 @@
+Notas: 
+
+1 commit por cada punto del trabajo
+2 Hacer un readme bonito para github
