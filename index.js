@@ -4,19 +4,20 @@ const fs = require('fs');
 const port = 3000;
 
 const server = http.createServer((req, res) => {
-  // Leer la ubicacion del archivo desde el url
   const url = req.url;
 
-  try {
-    const fileContent = fs.readFileSync(`.${url}`, 'utf8');
+  // Al usar un callback la respuesta se enviara al cargar el archivo
+  // Este codigo permite solicitudes concurrentes no tiene que esperar la respuesta para empezar a procesar otra 
+  fs.readFile(`.${url}`, 'utf8', (err, fileContent) => {
+    if (err) {
+      res.writeHead(404, { 'Content-Type': 'text/plain' });
+      res.end('Archivo no encontrado');
+      return;
+    }
 
     res.writeHead(200, { 'Content-Type': 'text/html' });
-
     res.end(fileContent);
-  } catch (error) {
-    res.writeHead(404, { 'Content-Type': 'text/plain' });
-    res.end('Archivo no encontrado');
-  }
+  });
 });
 
 server.listen(port, () => {
